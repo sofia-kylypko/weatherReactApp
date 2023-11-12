@@ -1,7 +1,6 @@
 import './App.css';
-import React, {useState} from "react"; 
+import React from "react"; 
 
-import SearchInput from "./SearchInput.js";
 import NextDays from "./NextDays.js";
 import Weather from "./Weather.js";
 

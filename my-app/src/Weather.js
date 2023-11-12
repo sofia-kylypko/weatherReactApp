@@ -50,7 +50,6 @@ export default function Weather(){
                 weather: [
                     {
                         main,
-                        icon
                     }
                 ],
                 wind:{

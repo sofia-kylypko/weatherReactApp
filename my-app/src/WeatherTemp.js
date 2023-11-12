@@ -4,7 +4,7 @@ export default function WeatherTemp(props){
     let [unit, setUnit]=useState("celsium");
     let temp=props.temperature;
 
-    if(unit=="celsium"){
+    if(unit==="celsium"){
         return (
             <div>
                 <h1 className="temperature">
@@ -28,12 +28,12 @@ export default function WeatherTemp(props){
     function changeMode(event){
         let valueArea=document.getElementsByClassName("value");
         console.log(valueArea.value);
-        if(event.target.id=="celsiumMode" && event.target.className!="activeMode"){
+        if(event.target.id==="celsiumMode" && event.target.className!=="activeMode"){
             event.target.className="activeMode";
             document.getElementById("farenheitMode").classList.remove("activeMode");
             //fareinheit to celcium
             setUnit("celsium");
-        }else if(event.target.id=="farenheitMode" && event.target.className!="activeMode"){
+        }else if(event.target.id==="farenheitMode" && event.target.className!=="activeMode"){
             event.target.className="activeMode";
             document.getElementById("celsiumMode").classList.remove("activeMode");
             //from celcium to fareinheit
