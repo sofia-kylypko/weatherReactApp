@@ -1,15 +1,86 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
+
+import WeatherIcon from "./WeatherIcon.js";
+import WeatherTemp from "./WeatherTemp.js";
 
 export default function Weather(){
-    return (
-        <div className="currentWeather">
-            <h1>Current city Name</h1>
-            <p>Update date and time</p>
-            <p>Weather state</p>
-            <p>temperature</p>
-            <img src="https://cdn-icons-png.flaticon.com/128/3222/3222791.png" alt="" />
-            <p>Precipitation</p>
-            <p>Wind</p>
-        </div>
-    );
+    const [ready, setReady]=useState(false);
+    const [returnedData, setReturnedData]=useState();
+    const [city,setCity]=useState("Kharkiv");
+    function handle(event){
+        event.preventDefault();
+        setCity(event.target.input.value);
+        let url = `https://api.openweathermap.org/data/2.5/weather?q=${event.target.input.value}&units=metric&appid=281450ec88936f4fa8ee9864682b49a0`;
+        axios.get(url).then(showResponse);
+        event.target.input.value="";
+    }
+
+    function showResponse(response){
+        console.log(response);
+        setReturnedData(response);
+        setReady(true);
+    }
+
+    function formatDate(time){
+        let weekDays=["Sunday","Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        let today=new Date(time);
+        
+        let minutes=today.getMinutes();
+        if(minutes.toString().length<2){
+            minutes=`0${minutes}`;
+        }
+        let todayIndex=today.getDay()-1;
+        if(todayIndex<0){
+            todayIndex=0;
+        }
+        let todayData=`${weekDays[todayIndex]} ${today.getHours()}:${minutes}`;
+        return todayData;
+    }
+
+    if(ready){
+        const {
+            data: {
+                main: { 
+                    temp,
+                    humidity
+                },
+                dt,
+                name,
+                weather: [
+                    {
+                        main,
+                        icon
+                    }
+                ],
+                wind:{
+                    speed,
+                }
+                
+            }
+        } = returnedData;
+        return (<div>
+            <form className="searhInput" onSubmit={handle}>
+                <input id="input" type="text" />
+                <label><button>Search</button></label>
+                <label><button>Current</button></label>
+            </form>
+            <div className="currentWeather">
+                <h1>{name}</h1>
+                <p>Last update: {formatDate(dt*1000)}</p>
+                <p>{main}</p>
+                <WeatherTemp temperature={temp}/>
+                <WeatherIcon info={main}/>
+                <p>Humidity: {humidity}%</p>
+                <p>Wind: {Math.round(speed)}km/h</p>
+            </div>
+        </div>); 
+    }else{
+        
+        let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=281450ec88936f4fa8ee9864682b49a0`;
+        axios.get(url).then(showResponse);
+
+        return "Loading...r";
+    }
+    
 }
