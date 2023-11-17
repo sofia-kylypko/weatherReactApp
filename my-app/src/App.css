@@ -16,6 +16,9 @@ main{
 .nextDays img {
   width: 80px;
 }
+.nextDays h2{
+  font-size: medium;
+}
 /*  */
 .searhInput {
   display: flex;
@@ -50,4 +53,9 @@ footer a {
   font-size: larger;
   text-decoration: none;
   color: orange;
+}
+/*  */
+.minimum {
+  color: rgb(127, 121, 121);
+  font-weight: 400;
 }
