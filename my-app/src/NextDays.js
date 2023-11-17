@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 
 import WeatherIcon from "./WeatherIcon.js";
 
@@ -6,7 +6,6 @@ export default function NextDays(props){
     if(props.weather){
         const {
             temperature:{
-                day,
                 maximum,
                 minimum
             },
@@ -20,7 +19,7 @@ export default function NextDays(props){
             let weekDays=["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday","Sunday"];
             let today=new Date(time*1000);
             let todayIndex=today.getDay()-1;
-            if(todayIndex==-1){
+            if(todayIndex===-1){
                 todayIndex=6;
             }
             return weekDays[todayIndex];

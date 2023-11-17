@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 import WeatherIcon from "./WeatherIcon.js";
@@ -56,7 +56,7 @@ export default function Weather(){
             minutes=`0${minutes}`;
         }
         let todayIndex=today.getDay()-1;
-        if(todayIndex==-1){
+        if(todayIndex===-1){
             todayIndex=6;
         }
         let todayData=`${weekDays[todayIndex]} ${today.getHours()}:${minutes}`;
@@ -101,9 +101,10 @@ export default function Weather(){
             </div>
             <div className='daysStack'>
                 {nextDaysData.map(item=>{
-                    if(nextDaysData.indexOf(item)!=0){
+                    if(nextDaysData.indexOf(item)!==0){
                         return <NextDays weather={nextDaysData[nextDaysData.indexOf(item)]}/>;
                     }
+                    return "";
                 })}
             </div>
             
