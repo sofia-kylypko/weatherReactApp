@@ -11,7 +11,7 @@ export default function Weather(){
     const [city,setCity]=useState("Kharkiv");
     const [nextDaysData, setNextDaysData]=useState([]);
 
-    let apiKey="ad793a6d772939c31783de5822791acf";
+    let apiKey="c8735bb7e8e2f8d8a38c7501f3cd47d3";
 
     function handle(event){
         event.preventDefault();
