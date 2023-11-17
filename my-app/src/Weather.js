@@ -88,7 +88,6 @@ export default function Weather(){
             <form className="searhInput" onSubmit={handle}>
                 <input id="input" type="text" />
                 <label><button>Search</button></label>
-                <label><button>Current</button></label>
             </form>
             <div className="currentWeather">
                 <h1>{name}</h1>
@@ -114,7 +113,7 @@ export default function Weather(){
         let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
         axios.get(url).then(showResponse);
 
-        return "Loading...r";
+        return "Loading...";
     }
     
 }
